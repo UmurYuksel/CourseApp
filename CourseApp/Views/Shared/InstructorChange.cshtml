@@ -1,0 +1,52 @@
+﻿@using CourseApp.Models
+@model ValueTuple<Instructor, IEnumerable<Instructor>>
+@{ int counter = 0;}
+
+<form asp-action="Change" method="post">
+    <input type="hidden" name="Id" value="@Model.Item1.Id" />
+    <input type="hidden" name="Name" value="@Model.Item1.Name" />
+
+
+    @foreach (Course item in Model.Item1.Courses)
+    {
+        <input type="hidden" name="Courses[@counter].Id" value="@item.Id" />
+        <input type="hidden" name="Courses[@counter].Name" value="@item.Name" />
+        <input type="hidden" name="Courses[@counter].Price" value="@item.Price" />
+        <input type="hidden" name="Courses[@counter].IsActive" @Html.Raw(item.IsActive ? "value=\"true\"" : "value=\"false\"") />
+        <input type="hidden" name="Courses[@counter].Description" value="@item.Description" />
+
+        <div class="row my-1">
+            <div class="col">
+                @item.Name
+            </div>
+            <div class="col">
+                @item.Price
+            </div>
+            <div class="col">
+                <select name="Courses[@counter].InstructorId" class="form-control">
+                    @foreach (Instructor i in Model.Item2)
+                    {
+                        if (item.Instructor == i)
+                        {
+                            <option selected value"="@i.Id">@i.Name</option>
+                        }
+                        else
+                        {
+                            <option value"="@i.Id">@i.Name</option>
+                        }
+
+                    }
+                </select>
+            </div>
+        </div>
+
+        { counter++; }
+    }
+
+  
+    <div class="col text-center">
+        <button type="submit" class="btn btn-success">Submit</button>
+        <a asp-action="Index" class="btn btn-primary">Cancel</a>
+    </div>
+
+</form>

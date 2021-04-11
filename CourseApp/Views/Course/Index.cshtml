@@ -1,0 +1,66 @@
+﻿@model IEnumerable<CourseApp.Models.Course>
+
+@{
+    ViewData["Title"] = "Index";
+    var counter = 1;
+
+    foreach (var item in Model)
+    {
+        counter=counter+1;
+    }
+}
+
+<h2>Index</h2>
+
+<div>
+    <h4>Course</h4>
+    <br />
+    <a asp-action="Create" class="btn btn-primary">Create New Course</a>
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            Done !
+        </div>
+    }
+   
+
+    <table class="table col-md-6 p-4 m-md-4">
+        <thead>
+            <tr>
+                @Html.Partial("_TableHeaders", new CourseApp.Models.Course())
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@counter</td>
+                <td>@Html.DisplayFor(x => item.Name)</td>
+                <td>@Html.DisplayFor(x => item.Price)</td>
+                <td>@Html.DisplayFor(x => item.Description)</td>
+                <td>@Html.DisplayFor(x => item.IsActive)</td>
+                <td>@Html.DisplayFor(x => item.Instructor.Name)</td>
+                <td>@Html.DisplayFor(x => item.Instructor.City)</td>
+                <td>@Html.DisplayFor(x => item.Instructor.Contact.Email)</td>
+                <td>@Html.DisplayFor(x => item.Instructor.Contact.Phone)</td>
+                <td>@Html.DisplayFor(x => item.Instructor.Contact.Adres.City)</td>
+                <td>@Html.DisplayFor(x => item.Instructor.Contact.Adres.Province)</td>
+                <td>@Html.DisplayFor(x => item.Instructor.Contact.Adres.Text)</td>
+                <td>@Html.DisplayFor(x => item.Instructor.Contact.Adres.City)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-courseId="@item.Id">Edit</a>
+                    <a asp-action="Delete" asp-route-courseId="@item.Id">Delete</a>
+                </td>
+
+
+            </tr>
+            }
+        </tbody>
+    </table>
+       
+        <br />
+        <hr />
+
+        <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>

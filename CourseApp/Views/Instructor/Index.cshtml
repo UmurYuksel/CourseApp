@@ -1,0 +1,57 @@
+﻿@model IEnumerable<CourseApp.Models.Instructor>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="m-4">
+    <div class="bg-success text-white p-4">
+        Instructors
+    </div>
+
+
+    @foreach (var item in Model)
+    {
+        <div class="bg-primary text-white p-2 text-center">
+            <p> @item.Name</p>
+            <a asp-action="Create" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Add</a>
+            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark btn-sm">Edit</a>
+            <a asp-action="Change" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Change</a>
+
+        </div>
+
+        @if (item.Courses == null || item.Courses.Count() == 0)
+        {
+            <div class="text-center p-1">No Courses</div>
+        }
+        else if (ViewBag.InstructorEditId == item.Id)
+        {
+            @Html.Partial("InstructorEdit", item)
+        }
+        else if (ViewBag.InstructorChangeId == item.Id)
+        {
+            @Html.Partial("InstructorChange", (item,Model))
+        }
+
+        else
+        {
+            @foreach (var course in item.Courses)
+            {
+                <div class="row">
+                    <div class="col">
+                        @course.Name
+                    </div>
+                    <div class="col">
+                        @course.Price
+                    </div>
+                </div>
+            }
+            if (ViewBag.InstructorCreateId == item.Id)
+            {
+                @Html.Partial("InstructorCreate", item)
+            }
+        }
+    }
+</div>
+

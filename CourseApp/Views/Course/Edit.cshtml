@@ -1,0 +1,66 @@
+﻿@model CourseApp.Models.Course
+
+@{
+    ViewData["Title"] = ViewBag.ActionMode;
+}
+
+<h2>Update</h2>
+<br />
+
+<h4>Course</h4>
+<hr />
+
+
+<div class="row p-4">
+    <div class="col-md-4">
+        <form asp-action="@ViewBag.ActionMode" method="post">
+
+            @Html.HiddenFor(x=>Model.InstructorId)
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Instructor.Name" class="control-label"></label>
+                <input asp-for="Instructor.Name" class="form-control" />
+                <span asp-validation-for="Instructor.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Instructor.City" class="control-label"></label>
+                <input asp-for="Instructor.City" class="form-control" />
+                <span asp-validation-for="Instructor.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+                <a asp-action="Delete" asp-route-courseId="@Model.Id" class="btn btn-default">Delete</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<CourseApp.Models.Request>
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Request</h4>
+    <hr />
+    @foreach (var item in Model)
+    {
+        <dl class="d-lg-inline-block">
+            <dt>
+                @Html.DisplayNameFor(model => item.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => item.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.Email)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => item.Phone)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.Phone)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => item.Message)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.Message)
+            </dd>
+            <dt>
+                <a asp-action="Edit" asp-route-id="@item.RequestSlug">Edit</a>
+            </dt>
+        </dl>
+    }
+
+</div>
+<div>
+  |
+    <a asp-action="Index">Back to List</a>
+</div>

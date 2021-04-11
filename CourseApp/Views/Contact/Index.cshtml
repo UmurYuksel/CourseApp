@@ -1,0 +1,19 @@
+﻿@model IEnumerable<CourseApp.Models.Contact>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+<br />
+
+<hr />
+<div class="bg-success text-white p-4">
+
+    @foreach (var item in Model)
+    {
+        <p>Email: @item.Email </p> <p>|</p> <p>Phone: @item.Phone</p>
+        <br />
+    }
+
+</div>
+
